@@ -405,7 +405,7 @@ class Tag extends EventEmitter {
      * @memberof Tag
      */
     parseReadMessageResponseValueForAtomic(data) {
-        const { SINT, INT, DINT, REAL, BOOL } = Types;
+        const { SINT, INT, DINT, REAL, BOOL, L33_STRING } = Types;
 
         // Read Tag Value
         /* eslint-disable indent */
@@ -424,6 +424,11 @@ class Tag extends EventEmitter {
                 break;
             case BOOL:
                 this.controller_value = data.readUInt8(2) !== 0;
+                break;
+            case L33_STRING:
+                var max = 8+data.readInt32LE(4);
+                if (max > data.length) max = data.length;
+                this.controller_value = data.toString('utf8', 8, max);
                 break;
             default:
                 throw new Error(
