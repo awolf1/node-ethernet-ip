@@ -28,7 +28,8 @@ const Types = {
     EPATH: 0xdc,
     ENGUNIT: 0xdd,
     STRINGI: 0xde,
-    STRUCT: 0xa002
+    STRUCT: 0xa002,
+    L33_STRING: 0x2a0
 };
 
 /**
